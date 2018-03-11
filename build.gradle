@@ -1,0 +1,29 @@
+group 'com.dfgtre'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.2'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.10.0'
+
+}
+task chromeTest(type: Test) {
+    systemProperty "driver", "chrome"
+    useTestNG() {
+        suites "testng.xml"
+    }
+}
+task firefoxTest(type: Test) {
+    systemProperty "driver", "firefox"
+    useTestNG() {
+        suites "testng.xml"
+    }
+}
+
