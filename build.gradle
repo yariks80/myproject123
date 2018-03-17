@@ -3,25 +3,46 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
+
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+configurations {
+    agent
+}
 dependencies {
+
+    agent "org.aspectj:aspectjweaver:1.8.0"
+    testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0"
+
     testCompile group: 'org.testng', name: 'testng', version: '6.14.2'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.10.0'
 
 }
+
+test.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+
 task chromeTest(type: Test) {
     systemProperty "driver", "chrome"
+    testLogging.showStandardStreams = true
     useTestNG() {
         suites "testng.xml"
     }
 }
 task firefoxTest(type: Test) {
     systemProperty "driver", "firefox"
+    useTestNG() {
+        suites "testng.xml"
+    }
+}
+task ieTest(type: Test) {
+    systemProperty "driver", "ie"
     useTestNG() {
         suites "testng.xml"
     }
