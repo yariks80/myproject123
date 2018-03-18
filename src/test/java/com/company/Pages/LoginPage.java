@@ -3,6 +3,7 @@ package com.company.Pages;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
@@ -19,8 +20,8 @@ public class LoginPage extends BasePage {
 
 
 	public void login(String name, String password) {
-		inputLogin.sendKeys(Keys.LEFT);
-		inputPassword.sendKeys(password);
+		driver.jsSetValue(inputLogin,name);
+		driver.jsSetValue(inputPassword,password);
 		btnLogin.click();
 	}
 

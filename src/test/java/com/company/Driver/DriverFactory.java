@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class DriverFactory {
     static WebDriver driver;
 
@@ -22,8 +24,11 @@ public class DriverFactory {
             System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
             DriverFactory.driver = new ChromeDriver();
         }
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         DriverFactory.driver.get(Constants.BASE_URL);
         DriverFactory.driver.manage().window().maximize();
+
+
         return DriverFactory.driver;
     }
 }
