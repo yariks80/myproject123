@@ -20,7 +20,9 @@ public class LoginPage extends BasePage {
 
 
 	public void login(String name, String password) {
+		log.info("set input name - "+name);
 		driver.jsSetValue(inputLogin,name);
+		log.info("set input password - "+password);
 		driver.jsSetValue(inputPassword,password);
 		btnLogin.click();
 	}
